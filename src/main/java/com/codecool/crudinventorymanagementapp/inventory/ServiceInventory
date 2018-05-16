@@ -1,0 +1,10 @@
+package com.codecool.crudinventorymanagementapp.inventory;
+
+public interface ServiceInventory {
+
+    Iterable<InventoryModel> findAllInventory();
+    InventoryModel findOneLens(Integer id);
+    void createLens(InventoryModel inventoryModel);
+    void deleteLens(Integer id);
+    void update(InventoryModel inventoryModel);
+}
