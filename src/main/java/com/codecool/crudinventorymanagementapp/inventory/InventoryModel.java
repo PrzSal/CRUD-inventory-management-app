@@ -1,10 +1,10 @@
 package com.codecool.crudinventorymanagementapp.inventory;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -38,8 +38,11 @@ public class InventoryModel {
     @NotEmpty
     private String status;
 
-    @NotEmpty
-    private Employee owner;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    @JsonIgnoreProperties("inventories")
+    private EmployeeModel owner;
 
     public int getId() {
         return id;
@@ -113,11 +116,11 @@ public class InventoryModel {
         this.status = status;
     }
 
-    public Employee getOwner() {
+    public EmployeeModel getOwner() {
         return owner;
     }
 
-    public void setOwner(Employee owner) {
+    public void setOwner(EmployeeModel owner) {
         this.owner = owner;
     }
 }
