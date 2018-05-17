@@ -1,5 +1,6 @@
-package com.codecool.crudinventorymanagementapp.inventory;
+package com.codecool.crudinventorymanagementapp.employee;
 
+import com.codecool.crudinventorymanagementapp.inventory.InventoryModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
