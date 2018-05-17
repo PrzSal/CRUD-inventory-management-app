@@ -8,10 +8,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class EmployeeModel {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotEmpty
@@ -19,10 +20,6 @@ public class EmployeeModel {
 
     @NotEmpty
     private String lastName;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties("employee")
-    private Set<InventoryModel> inventories = new HashSet<>();
 
     public int getId() {
         return id;
@@ -46,13 +43,5 @@ public class EmployeeModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<InventoryModel> getInventories() {
-        return inventories;
-    }
-
-    public void setInventories(Set<InventoryModel> inventories) {
-        this.inventories = inventories;
     }
 }

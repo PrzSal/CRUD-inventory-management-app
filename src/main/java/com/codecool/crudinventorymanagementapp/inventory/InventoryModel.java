@@ -1,12 +1,10 @@
 package com.codecool.crudinventorymanagementapp.inventory;
 
 import com.codecool.crudinventorymanagementapp.employee.EmployeeModel;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 public class InventoryModel {
@@ -16,7 +14,7 @@ public class InventoryModel {
     private int id;
 
     @NotEmpty
-    private String name;
+    private String nameProduct;
 
     @NotEmpty
     private String description;
@@ -30,20 +28,17 @@ public class InventoryModel {
     @NotEmpty
     private String code;
 
-    @NotEmpty
+    @NotNull
     private int initialValue;
 
     @NotEmpty
-    private Date buyingDate;
+    private String buyingDate;
 
     @NotEmpty
     private String status;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false)
-    @JsonIgnoreProperties("inventories")
-    private EmployeeModel owner;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private EmployeeModel employeeModel;
 
     public int getId() {
         return id;
@@ -53,12 +48,12 @@ public class InventoryModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameProduct(String name) {
+        this.nameProduct = name;
     }
 
     public String getDescription() {
@@ -101,11 +96,11 @@ public class InventoryModel {
         this.initialValue = initialValue;
     }
 
-    public Date getBuyingDate() {
+    public String getBuyingDate() {
         return buyingDate;
     }
 
-    public void setBuyingDate(Date buyingDate) {
+    public void setBuyingDate(String buyingDate) {
         this.buyingDate = buyingDate;
     }
 
@@ -117,11 +112,11 @@ public class InventoryModel {
         this.status = status;
     }
 
-    public EmployeeModel getOwner() {
-        return owner;
+    public EmployeeModel getEmployeeModel() {
+        return employeeModel;
     }
 
     public void setOwner(EmployeeModel owner) {
-        this.owner = owner;
+        this.employeeModel = owner;
     }
 }
