@@ -16,10 +16,10 @@ public class ServiceInventoryImpl implements ServiceInventory {
         return this.repositoryInventory.findAll();
     }
 
-//    @Override
-//    public InventoryModel findOneInventory(Integer id) {
-//        return this.repositoryInventory.findById(id);
-//    }
+    @Override
+    public InventoryModel findOneInventory(Integer id) {
+        return this.repositoryInventory.findOne(id);
+    }
 
     @Override
     public void createInventory(InventoryModel inventoryModel) {
@@ -28,7 +28,7 @@ public class ServiceInventoryImpl implements ServiceInventory {
 
     @Override
     public void deleteInventory(Integer id) {
-        this.repositoryInventory.deleteById(id);
+        this.repositoryInventory.delete(id);
     }
 
     @Override
