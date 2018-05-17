@@ -2,9 +2,9 @@ package com.codecool.crudinventorymanagementapp.inventory;
 
 import com.codecool.crudinventorymanagementapp.employee.EmployeeModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
