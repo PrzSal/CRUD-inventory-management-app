@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="header :: header-css"/>
+</head>
+<body>
+    <div th:replace="header :: header"/>
+    <div class="container">
+        <div class="starter-template">
+            <h2>List of Inventory</h2>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Last name</th>
+                </tr>
+                <tr th:each="inventory : ${inventories}">
+                    <td th:text="${inventory.id}">id</td>
+                    <td th:text="${inventory.status}">status</td>
+                    <td th:text="${inventory.employeeModel.name}">name</td>
+                    <td th:text="${inventory.employeeModel.lastName}">surname</td>
+                </tr>
+            </table>
+            <h1>Employee page (Spring Security protected)</h1>
+            <h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+    <div th:replace="footer :: footer"/>
+</body>
+</html>
