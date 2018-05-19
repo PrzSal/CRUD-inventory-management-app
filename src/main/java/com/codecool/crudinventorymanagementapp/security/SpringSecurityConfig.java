@@ -3,6 +3,7 @@ package com.codecool.crudinventorymanagementapp.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,5 +40,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(successHandler);
 
 
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
+
+        authentication.inMemoryAuthentication()
+                .withUser("user").password("user").roles("EMPLOYEE")
+                .and()
+                .withUser("admin").password("admin").roles("ADMIN");
     }
 }
