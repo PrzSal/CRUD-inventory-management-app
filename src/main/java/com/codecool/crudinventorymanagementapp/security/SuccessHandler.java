@@ -55,4 +55,12 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
             return "/login";
         }
     }
+
+    public RedirectStrategy getRedirectStrategy() {
+        return redirectStrategy;
+    }
+
+    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
+        this.redirectStrategy = redirectStrategy;
+    }
 }
