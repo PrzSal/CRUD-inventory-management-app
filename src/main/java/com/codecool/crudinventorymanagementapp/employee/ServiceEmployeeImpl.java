@@ -32,6 +32,13 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
 
     @Override
     public void updateEmployee(EmployeeModel employeeModel) {
-        this.repositoryEmployee.save(employeeModel);
+
+        if (employeeModel.getId() != 0 && repositoryEmployee.findOne(employeeModel.getId()) != null) {
+            try {
+                repositoryEmployee.save(employeeModel);
+            } catch (RuntimeException e) {
+
+            }
+        }
     }
 }
