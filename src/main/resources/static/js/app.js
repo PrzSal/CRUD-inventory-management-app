@@ -31,3 +31,26 @@ function validateSurname(ev) {
         statusSurname = "true";
     }
 }
+
+function validateEmail(ev) {
+    var email = ev.target.value;
+    var errorBox = this.parentElement.nextElementSibling;
+    if(!validator.mailWithSpecialCharAt(email)){
+        this.classList.add("error-border");
+        errorBox.textContent = "Email should be @";
+        statusEmail = "false";
+    } else {
+        this.classList.remove("error-border");
+        errorBox.textContent = "";
+        statusEmail = "true";
+    }
+    if(!validator.mailWithSpecialCharDot(email)){
+        this.classList.add("error-border");
+        errorBox.textContent = "Email should be . after @";
+        statusEmail = "false";
+    } else {
+        this.classList.remove("error-border");
+        errorBox.textContent = "";
+        statusEmail = "true";
+    }
+}
