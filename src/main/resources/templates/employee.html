@@ -7,7 +7,7 @@
 <div th:replace="header :: header"/>
     <div class="container">
         <div class="starter-template">
-
+            <a th:href="@{/employee/add}">add</a>
             <div class="table">
 
                 <table class="tg">
@@ -16,11 +16,17 @@
                         <td>Id</td>
                         <td>Name</td>
                         <td>Last name</td>
+                        <td>email</td>
+                        <td>phone number</td>
+                        <td>region responsibility</td>
                     </tr>
                     <tr th:each="employee : ${employees}">
                         <td th:text="${employee.id}">id</td>
                         <td th:text="${employee.name}">name</td>
-                        <td th:text="${employee.lastName}">surname</td>
+                        <td th:text="${employee.surname}">surname</td>
+                        <td th:text="${employee.email}">email</td>
+                        <td th:text="${employee.phone}">phone</td>
+                        <td th:text="${employee.regionResponsibility}">region responsibility </td>
                     </tr>
                 </table>
                 <h1>Admin (Spring Security protected)</h1>
