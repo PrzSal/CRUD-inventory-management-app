@@ -54,3 +54,14 @@ function validateEmail(ev) {
         statusEmail = "true";
     }
 }
+
+function validateForm() {
+
+    if (statusName == "false" || statusSurname == "false" || statusEmail == "false") {
+        alert("All field must be correct");
+        return false;
+    }
+}
+document.getElementsByName("name")[0].addEventListener("change", validateFirstName);
+document.getElementsByName("surname")[0].addEventListener("change", validateSurname);
+document.getElementsByName("email")[0].addEventListener("change", validateEmail);
