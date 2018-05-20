@@ -21,6 +21,7 @@
                         <td>region responsibility</td>
                     </tr>
                     <tr th:each="employee : ${employees}">
+                        <td> <a th:href="@{/employee/}+${employee.id}">edit</a> </td>
                         <td th:text="${employee.id}">id</td>
                         <td th:text="${employee.name}">name</td>
                         <td th:text="${employee.surname}">surname</td>
