@@ -30,13 +30,22 @@
                     <input type="text" pattern="[0-9]+" name="email" th:field="*{phone}"/>
                 </label>
                 <div class="error-text"></div>
+
                 <label>
                     Region of responsibility:
                     <select th:field="*{regionResponsibility}">
                         <option selected="true" name="regionResponsibility" th:value="hun-budapest">Hungary - Budapest</option>
-                        <option name="regionResponsibility" th:value="hun-miskolc">Hungary - Miskolc </option>
-                        <option name="regionResponsibility" th:value="pol-krakow">Poland - Krakow </option>
-                        <option name="regionResponsibility" th:value="pol-warsaw">Poland - Warsaw </option>
+                        <option name="regionResponsibility" th:value="hun-miskolc">Hungary - Miskolc</option>
+                        <option name="regionResponsibility" th:value="pol-krakow">Poland - Krakow</option>
+                        <option name="regionResponsibility" th:value="pol-warsaw">Poland - Warsaw</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Role:
+                    <select th:field="*{role}">
+                        <option selected="true" name="role" th:value="EMPLOYEE">Role Employee</option>
+                        <option name="role" th:value="ADMIN">Role Admin</option>
                     </select>
                 </label>
                 <div class="error-text"></div>

@@ -40,6 +40,14 @@
                     </select>
                 </label>
                 <div class="error-text"></div>
+                <label>
+                    Role:
+                    <select th:field="*{role}">
+                        <option selected="true" name="role" th:value="EMPLOYEE">Role Employee</option>
+                        <option name="role" th:value="ADMIN">Role Admin</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
                 <input class="btn primary" type="submit" value="add"/>
             </form>
         </div>
