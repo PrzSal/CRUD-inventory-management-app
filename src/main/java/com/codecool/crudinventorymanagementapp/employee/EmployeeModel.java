@@ -26,6 +26,14 @@ public class EmployeeModel {
     @NotEmpty
     private String regionResponsibility;
 
+    @NotEmpty
+    private String password;
+
+    @NotEmpty
+    private String role;
+
+    @NotEmpty
+    private String login;
     public int getId() {
         return id;
     }
@@ -64,6 +72,30 @@ public class EmployeeModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getRegionResponsibility() {
