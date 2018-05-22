@@ -22,6 +22,8 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
 
     @Override
     public void createEmployee(EmployeeModel employeeModel) {
+        employeeModel.setLogin(createLogin(employeeModel));
+        employeeModel.setPassword(createPassword(employeeModel));
         this.repositoryEmployee.save(employeeModel);
     }
 
@@ -40,5 +42,17 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
 
             }
         }
+    }
+
+    private String createLogin(EmployeeModel employeeModel) {
+        String firstThreeName = employeeModel.getName().substring(0, 3);
+        String firstThreeSurname = employeeModel.getSurname().substring(0, 3);
+        String newLogin = firstThreeName + firstThreeSurname;
+        return newLogin;
+    }
+
+    private String createPassword(EmployeeModel employeeModel) {
+        String newPassword = employeeModel.getLogin();
+        return newPassword;
     }
 }
