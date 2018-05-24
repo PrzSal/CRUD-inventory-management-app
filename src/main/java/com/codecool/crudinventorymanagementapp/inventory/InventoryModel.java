@@ -20,6 +20,9 @@ public class InventoryModel {
     private String description;
 
     @NotEmpty
+    private String placeResidence;
+
+    @NotEmpty
     private String manufacture;
 
     @NotEmpty
@@ -118,5 +121,13 @@ public class InventoryModel {
 
     public void setEmployeeModel(EmployeeModel owner) {
         this.employeeModel = owner;
+    }
+
+    public String getPlaceResidence() {
+        return placeResidence;
+    }
+
+    public void setPlaceResidence(String placeResidence) {
+        this.placeResidence = placeResidence;
     }
 }
