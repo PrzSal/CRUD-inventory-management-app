@@ -20,7 +20,7 @@ public class InventoryModel {
     private String description;
 
     @NotEmpty
-    private String manufacter;
+    private String manufacture;
 
     @NotEmpty
     private String category;
@@ -64,12 +64,12 @@ public class InventoryModel {
         this.description = description;
     }
 
-    public String getManufacter() {
-        return manufacter;
+    public String getManufacture() {
+        return manufacture;
     }
 
-    public void setManufacter(String manufacter) {
-        this.manufacter = manufacter;
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
 
     public String getCategory() {
@@ -116,7 +116,7 @@ public class InventoryModel {
         return employeeModel;
     }
 
-    public void setOwner(EmployeeModel owner) {
+    public void setEmployeeModel(EmployeeModel owner) {
         this.employeeModel = owner;
     }
 }
