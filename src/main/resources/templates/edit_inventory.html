@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Inventory</title>
+    <div th:replace="header :: header-css"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="form-in">
+            <form name="myForm" th:action="@{/inventory/__${id}__}" th:method="put" th:object="${inventoryModel}" onsubmit="return validateForm()">
+                <label>
+                    Product name:
+                    <input type="text" name="nameProduct" th:field="*{nameProduct}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+
+                <label>
+                    Description:
+                    <input type="text" pattern="[a-zA-Z]+" name="description" th:field="*{description}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Manufacture:
+                    <input type="text" name="manufacture" th:field="*{manufacture}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Category:
+                    <select th:field="*{category}">
+                        <option selected="true" name="category" th:value="electronics">Electronics</option>
+                        <option name="category" th:value="furniture">Furniture</option>
+                        <option name="category" th:value="tools">Tools</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Initial Value:
+                    <input type="text" pattern="[0-9]+" name="initialValue" th:field="*{initialValue}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Buying date:
+                    <input type="text" name="buyingDate" th:field="*{buyingDate}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Status:
+                    <select th:field="*{status}">
+                        <option selected="true" name="status" th:value="available">Available</option>
+                        <option selected="true" name="status" th:value="lost">Lost</option>
+                        <option selected="true" name="status" th:value="stolen">Stolen</option>
+                        <option selected="true" name="status" th:value="destroyed">Destroyed</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Place Residence
+                    <select th:field="*{placeResidence}">
+                        <option selected="true" name="placeResidence" th:value="hun-budapest">Hungary - Budapest</option>
+                        <option name="placeResidence" th:value="hun-miskolc">Hungary - Miskolc</option>
+                        <option name="placeResidence" th:value="pol-krakow">Poland - Krakow</option>
+                        <option name="placeResidence" th:value="pol-warsaw">Poland - Warsaw</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <input type="text" name="code" th:field="*{code}" hidden="true"/>
+                <input name="employeeModel" th:field="*{employeeModel}" hidden="true"/>
+                <input class="btn primary" type="submit" value="add"/>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/validate.js" />
+<script src="/js/app.js" />
+</body>
+</html>

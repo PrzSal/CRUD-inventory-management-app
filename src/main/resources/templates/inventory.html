@@ -4,30 +4,57 @@
     <div th:replace="header :: header-css"/>
 </head>
 <body>
-    <div th:replace="header :: header"/>
-    <div class="container">
-        <div class="starter-template">
-            <h2>List of Inventory</h2>
-            <table>
+<div th:replace="header :: header"/>
+<div class="container">
+    <div class="starter-template">
+        <a th:href="@{/inventory/add}">add</a>
+        <div class="table">
+
+            <table class="tg">
+                <div class="text">List of Employee</div>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Last name</th>
+                    <td>Delete</td>
+                    <td>Edit Record</td>
+                    <td>Id</td>
+                    <td>Product Name</td>
+                    <td>Description</td>
+                    <td>Manufacture</td>
+                    <td>category</td>
+                    <td>code</td>
+                    <td>initial value</td>
+                    <td>Buying Date</td>
+                    <td>Status</td>
+                    <td>Place Residence</td>
+                    <td>Owner</td>
                 </tr>
                 <tr th:each="inventory : ${inventories}">
+                    <form name="myForm" th:action="@{/inventory/delete/}+${inventory.id}" th:method="delete">
+                        <td>
+                            <input class="btn primary" type="submit" value="delete"/>
+                        </td>
+                    </form>
+                    <td> <a th:href="@{/inventory/}+${inventory.id}">edit</a> </td>
                     <td th:text="${inventory.id}">id</td>
-                    <td th:text="${inventory.status}">status</td>
-                    <td th:text="${inventory.employeeModel.name}">name</td>
-                    <td th:text="${inventory.employeeModel.lastName}">surname</td>
+                    <td th:text="${inventory.nameProduct}">Product name</td>
+                    <td th:text="${inventory.description}">Description</td>
+                    <td th:text="${inventory.manufacture}">Manufacture</td>
+                    <td th:text="${inventory.category}">Category</td>
+                    <td th:text="${inventory.code}">Code</td>
+                    <td th:text="${inventory.initialValue}">Initial Value</td>
+                    <td th:text="${inventory.buyingDate}">Buying Date</td>
+                    <td th:text="${inventory.status}">Status</td>
+                    <td th:text="${inventory.placeResidence}">Place Residence</td>
+                    <td th:text="${inventory.employeeModel.surname}">Owner</td>
                 </tr>
             </table>
-            <h1>Employee page (Spring Security protected)</h1>
-            <h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1>
-            <form th:action="@{/logout}" method="post">
+            <h1>Employee (Spring Security protected)</h1>
+            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+            <form th:action="@{/login}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>
         </div>
     </div>
-    <div th:replace="footer :: footer"/>
+</div>
+<div th:replace="footer :: footer"/>
 </body>
 </html>
