@@ -44,8 +44,9 @@ public class ControllerEmployee {
         return new ModelAndView("edit_employee", params);
     }
 
-    @PostMapping(path = "/employee")
+    @PostMapping(path = "/employee/add")
     public ModelAndView create(@ModelAttribute EmployeeModel employeeModel) {
+        employeeModel.setEnabled(true);
         this.serviceEmployee.createEmployee(employeeModel);
         Map<String, Iterable> params = new HashMap<>();
         params.put("employees", this.serviceEmployee.findAllEmployee());
@@ -55,6 +56,7 @@ public class ControllerEmployee {
     @RequestMapping(value ="/employee/{id}", method= RequestMethod.PUT)
     public ModelAndView update(@PathVariable String id, @ModelAttribute EmployeeModel employeeModel) {
         employeeModel.setId(Integer.valueOf(id));
+        employeeModel.setEnabled(true);
         this.serviceEmployee.updateEmployee(employeeModel);
         Map<String, Iterable> params = new HashMap<>();
         params.put("employees", this.serviceEmployee.findAllEmployee());
