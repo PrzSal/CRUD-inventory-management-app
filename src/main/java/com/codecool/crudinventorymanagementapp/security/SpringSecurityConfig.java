@@ -22,22 +22,26 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     SuccessHandler successHandler;
 
+    @Autowired
+    org.apache.tomcat.jdbc.pool.DataSource datasource;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/employee/**").hasAnyRole("ADMIN")
-                .antMatchers("/inventory/**").hasAnyRole("EMPLOYEE")
+                .antMatchers("/employee/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/inventory/**").access("hasRole('ROLE_EMPLOYEE')")
                 .anyRequest()
                 .authenticated()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .successHandler(successHandler);
+                .successHandler(successHandler)
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and()
+                .csrf();
     }
 
     @Override
@@ -46,14 +50,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/webjars/**");
         web.ignoring().antMatchers("/css/**", "/fonts/**", "/libs/**");
     }
-
-
+    
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
-
-        authentication.inMemoryAuthentication()
-                .withUser("user").password("user").roles("EMPLOYEE")
-                .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(datasource)
+                .usersByUsernameQuery(
+                        "SELECT login, password, enabled from employee_model WHERE login=?")
+                .authoritiesByUsernameQuery(
+                        "SELECT login, role from employee_model WHERE login=?");
     }
 }
