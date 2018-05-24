@@ -50,6 +50,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     private String setTargetUrl(Authentication authentication, HttpServletRequest request) {
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+        System.out.println(roles);
         if (roles.contains("ROLE_EMPLOYEE")) {
             return request.getContextPath() + "/inventory";
         } else if (roles.contains("ROLE_ADMIN")) {

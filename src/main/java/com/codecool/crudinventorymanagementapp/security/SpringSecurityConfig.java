@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -21,33 +22,41 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     SuccessHandler successHandler;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Autowired
+    org.apache.tomcat.jdbc.pool.DataSource datasource;
 
-        http.csrf().disable()
-                .authorizeRequests()
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/employee/**").hasAnyRole("ADMIN")
-                .antMatchers("/inventory/**").hasAnyRole("EMPLOYEE")
+                .antMatchers("/employee/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/inventory/**").access("hasRole('ROLE_EMPLOYEE')")
                 .anyRequest()
                 .authenticated()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .successHandler(successHandler);
+                .successHandler(successHandler)
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .and()
+                .csrf();
+    }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
 
+        web.ignoring().antMatchers("/webjars/**");
+        web.ignoring().antMatchers("/css/**", "/fonts/**", "/libs/**");
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
-
-        authentication.inMemoryAuthentication()
-                .withUser("user").password("user").roles("EMPLOYEE")
-                .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(datasource)
+                .usersByUsernameQuery(
+                        "SELECT login, password, enabled from employee_model WHERE login=?")
+                .authoritiesByUsernameQuery(
+                        "SELECT login, role from employee_model WHERE login=?");
     }
 }

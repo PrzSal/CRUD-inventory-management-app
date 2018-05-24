@@ -7,24 +7,35 @@
 <div th:replace="header :: header"/>
     <div class="container">
         <div class="starter-template">
-            <h2>List of Employee</h2>
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Last name</th>
-                </tr>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}">id</td>
-                    <td th:text="${employee.name}">name</td>
-                    <td th:text="${employee.lastName}">surname</td>
-                </tr>
-            </table>
-            <h1>Admin (Spring Security protected)</h1>
-            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
+            <a th:href="@{/employee/add}">add</a>
+            <div class="table">
+
+                <table class="tg">
+                    <div class="text">List of Employee</div>
+                    <tr>
+                        <td>Id</td>
+                        <td>Name</td>
+                        <td>Last name</td>
+                        <td>email</td>
+                        <td>phone number</td>
+                        <td>region responsibility</td>
+                    </tr>
+                    <tr th:each="employee : ${employees}">
+                        <td> <a th:href="@{/employee/}+${employee.id}">edit</a> </td>
+                        <td th:text="${employee.id}">id</td>
+                        <td th:text="${employee.name}">name</td>
+                        <td th:text="${employee.surname}">surname</td>
+                        <td th:text="${employee.email}">email</td>
+                        <td th:text="${employee.phone}">phone</td>
+                        <td th:text="${employee.regionResponsibility}">region responsibility </td>
+                    </tr>
+                </table>
+                <h1>Admin (Spring Security protected)</h1>
+                <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                <form th:action="@{/login}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
         </div>
     </div>
 <div th:replace="footer :: footer"/>
