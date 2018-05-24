@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Employee</title>
+    <div th:replace="header :: header-css"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="form-in">
+            <form name="myForm" th:action="@{/inventory/add}" th:object="${inventoryModel}"  th:method="post" onsubmit="return validateForm()">
+                <label>
+                    Product name:
+                    <input type="text" name="nameProduct" th:field="*{nameProduct}" required="true"/>
+                </label>
+                <div class="error-text"></div>
+
+                <label>
+                    Description:
+                    <input type="text" pattern="[a-zA-Z]+" name="description" th:field="*{description}"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Manufacture:
+                    <input type="text" name="manufacture" th:field="*{manufacture}"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Category:
+                    <select th:field="*{category}">
+                        <option selected="true" name="category" th:value="electronics">Electronics</option>
+                        <option name="category" th:value="furniture">Furniture</option>
+                        <option name="category" th:value="tools">Tools</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Initial Value:
+                    <input type="text" pattern="[0-9]+" name="initialValue" th:field="*{initialValue}"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Buying date:
+                    <input type="text" pattern="[0-9]+" name="buyingDate" th:field="*{buyingDate}"/>
+                </label>
+                <div class="error-text"></div>
+                <label>
+                    Status:
+                    <select th:field="*{status}">
+                        <option selected="true" name="status" th:value="available">Available</option>
+                        <option selected="true" name="status" th:value="lost">Lost</option>
+                        <option selected="true" name="status" th:value="stolen">Stolen</option>
+                        <option selected="true" name="status" th:value="destroyed">Destroyed</option>
+                    </select>
+                </label>
+                <div class="error-text"></div>
+                <input class="btn primary" type="submit" value="add"/>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/validate.js" />
+<script src="/js/app.js" />
+</body>
+</html>
