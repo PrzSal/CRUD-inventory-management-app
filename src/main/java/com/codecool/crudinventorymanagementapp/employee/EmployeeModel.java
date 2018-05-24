@@ -32,6 +32,8 @@ public class EmployeeModel {
     @NotEmpty
     private String role;
 
+    private boolean enabled;
+
     @NotEmpty
     private String login;
     public int getId() {
@@ -104,5 +106,13 @@ public class EmployeeModel {
 
     public void setRegionResponsibility(String regionResponsibility) {
         this.regionResponsibility = regionResponsibility;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
