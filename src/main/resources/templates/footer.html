@@ -10,7 +10,6 @@
             <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/login}">Sign Out</a>
             </span>
         </footer>
     </div>

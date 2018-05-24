@@ -34,12 +34,14 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
 
     @Override
     public void updateEmployee(EmployeeModel employeeModel) {
-
+        employeeModel.setLogin(createLogin(employeeModel));
+        employeeModel.setPassword(createPassword(employeeModel));
         if (employeeModel.getId() != 0 && repositoryEmployee.findOne(employeeModel.getId()) != null) {
+            System.out.println( );
             try {
                 repositoryEmployee.save(employeeModel);
             } catch (RuntimeException e) {
-
+                System.out.println("exce");
             }
         }
     }
