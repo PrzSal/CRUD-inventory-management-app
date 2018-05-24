@@ -8,7 +8,7 @@
 <div class="container">
     <div class="card">
         <div class="form-in">
-            <form name="myForm" th:method="put" th:object="${employeeModel}" onsubmit="return validateForm()">
+            <form name="myForm" th:action="@{/employee/__${id}__}" th:method="put" th:object="${employeeModel}" onsubmit="return validateForm()">
                 <label>
                     First name:
                     <input type="text" pattern="[a-zA-Z]+" name="name" th:field="*{name}" required="true"/>
@@ -43,8 +43,8 @@
                 <label>
                     Role:
                     <select th:field="*{role}">
-                        <option selected="true" name="role" th:value="EMPLOYEE">Role Employee</option>
-                        <option name="role" th:value="ADMIN">Role Admin</option>
+                        <option selected="true" name="role" th:value="ROLE_EMPLOYEE">Role Employee</option>
+                        <option name="role" th:value="ROLE_ADMIN">Role Admin</option>
                     </select>
                 </label>
                 <div class="error-text"></div>
