@@ -1,7 +1,5 @@
 package com.codecool.crudinventorymanagementapp.inventory;
 
-import com.codecool.crudinventorymanagementapp.employee.EmployeeModel;
-import com.codecool.crudinventorymanagementapp.employee.ServiceEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +14,9 @@ import java.util.Map;
 public class ControllerInventory {
 
     private ServiceInventory serviceInventory;
-    private ServiceEmployee serviceEmployee;
     @Autowired
-    public ControllerInventory(ServiceInventory serviceInventory, ServiceEmployee serviceEmployee) {
+    public ControllerInventory(ServiceInventory serviceInventory) {
         this.serviceInventory = serviceInventory;
-        this.serviceEmployee = serviceEmployee;
     }
 
     @GetMapping(path = "")
@@ -38,8 +34,6 @@ public class ControllerInventory {
 
     @PostMapping(path = "/inventory/add")
     public ModelAndView createInventory(@ModelAttribute InventoryModel inventoryModel) {
-        EmployeeModel employeeModel =  this.serviceEmployee.findOneEmployee(2);
-        inventoryModel.setEmployeeModel(employeeModel);
         this.serviceInventory.createInventory(inventoryModel);
         Map<String, Iterable> params = new HashMap<>();
         params.put("inventories", this.serviceInventory.findAllInventory());
@@ -59,8 +53,6 @@ public class ControllerInventory {
 
     @RequestMapping(value ="/inventory/{id}", method= RequestMethod.PUT)
     public ModelAndView update(@PathVariable String id, @ModelAttribute InventoryModel inventoryModel) {
-        EmployeeModel employeeModel =  this.serviceEmployee.findOneEmployee(2);
-        inventoryModel.setEmployeeModel(employeeModel);
         inventoryModel.setId(Integer.valueOf(id));
         this.serviceInventory.updateInventory(inventoryModel);
         Map<String, Iterable> params = new HashMap<>();
