@@ -23,9 +23,15 @@
                     <td>initial value</td>
                     <td>Buying Date</td>
                     <td>Status</td>
+                    <td>Place Residence</td>
                     <td>Owner</td>
                 </tr>
                 <tr th:each="inventory : ${inventories}">
+                    <form name="myForm" th:action="@{/inventory/delete/}+${inventory.id}" th:method="delete">
+                        <td>
+                            <input class="btn primary" type="submit" value="delete"/>
+                        </td>
+                    </form>
                     <td> <a th:href="@{/inventory/}+${inventory.id}">edit</a> </td>
                     <td th:text="${inventory.id}">id</td>
                     <td th:text="${inventory.nameProduct}">Product name</td>
@@ -36,6 +42,7 @@
                     <td th:text="${inventory.initialValue}">Initial Value</td>
                     <td th:text="${inventory.buyingDate}">Buying Date</td>
                     <td th:text="${inventory.status}">Status</td>
+                    <td th:text="${inventory.placeResidence}">Place Residence</td>
                     <td th:text="${inventory.employeeModel.surname}">Owner</td>
                 </tr>
             </table>
