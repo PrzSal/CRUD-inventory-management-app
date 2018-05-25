@@ -14,20 +14,22 @@ public class ServiceInventoryImpl implements ServiceInventory {
     private RepositoryInventory repositoryInventory;
     private ServiceEmployee serviceEmployee;
     private SuccessHandler successHandler;
-    private MyQuery service;
+    private MyQueryToEmployeeModel service;
+    private MyQueryToInventoryModel serviceToInventory;
     private Random randomGenerator;
 
-
-    public ServiceInventoryImpl(RepositoryInventory repositoryInventory, ServiceEmployee serviceEmployee, SuccessHandler successHandler, MyQuery service) {
+    public ServiceInventoryImpl(RepositoryInventory repositoryInventory, ServiceEmployee serviceEmployee, SuccessHandler successHandler, MyQueryToEmployeeModel service, MyQueryToInventoryModel serviceToInventory) {
         this.repositoryInventory = repositoryInventory;
         this.serviceEmployee = serviceEmployee;
         this.successHandler = successHandler;
         this.service = service;
+        this.serviceToInventory = serviceToInventory;
     }
 
     @Override
-    public Iterable<InventoryModel> findAllInventory() {
-        return this.repositoryInventory.findAll();
+    public Iterable<InventoryModel> findAllInventoryForUser() {
+        Integer employeeModelId = this.findAndCreateEmployeeModel().getId();
+        return serviceToInventory.findAllByEmployeeModelId(employeeModelId);
     }
 
     @Override
@@ -37,7 +39,8 @@ public class ServiceInventoryImpl implements ServiceInventory {
 
     @Override
     public void createInventory(InventoryModel inventoryModel) {
-        inventoryModel = findAndCreateEmployeeModel(inventoryModel);
+        EmployeeModel employeeModel = this.findAndCreateEmployeeModel();
+        inventoryModel.setEmployeeModel(employeeModel);
         inventoryModel.setCode(this.createCode(inventoryModel));
         this.repositoryInventory.save(inventoryModel);
     }
@@ -49,7 +52,8 @@ public class ServiceInventoryImpl implements ServiceInventory {
 
     @Override
     public void updateInventory(InventoryModel inventoryModel) {
-        inventoryModel = findAndCreateEmployeeModel(inventoryModel);
+        EmployeeModel employeeModel = this.findAndCreateEmployeeModel();
+        inventoryModel.setEmployeeModel(employeeModel);
         this.repositoryInventory.save(inventoryModel);
     }
 
@@ -80,9 +84,8 @@ public class ServiceInventoryImpl implements ServiceInventory {
         return employeeModel;
     }
 
-    private InventoryModel findAndCreateEmployeeModel(InventoryModel inventoryModel) {
+    private EmployeeModel findAndCreateEmployeeModel() {
         EmployeeModel employeeModel = service.findAllByLogin(successHandler.getLogin());
-        inventoryModel.setEmployeeModel(employeeModel);
-        return inventoryModel;
+        return employeeModel;
     }
 }

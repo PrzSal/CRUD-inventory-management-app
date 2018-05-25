@@ -2,7 +2,7 @@ package com.codecool.crudinventorymanagementapp.inventory;
 
 public interface ServiceInventory {
 
-    Iterable<InventoryModel> findAllInventory();
+    Iterable<InventoryModel> findAllInventoryForUser();
     InventoryModel findOneInventory(Integer id);
     void createInventory(InventoryModel inventoryModel);
     void deleteInventory(Integer id);
