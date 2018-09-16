@@ -2,8 +2,8 @@ package com.codecool.crudinventorymanagementapp.employee;
 
 public interface ServiceEmployee {
     Iterable<EmployeeModel> findAllEmployee();
-    EmployeeModel findOneEmployee(Integer id);
+    EmployeeModel findOneEmployee(Long id);
     void createEmployee(EmployeeModel employeeModel);
-    void deleteEmployee(Integer id);
+    void deleteEmployee(Long id);
     void updateEmployee(EmployeeModel employeeModel);
 }
