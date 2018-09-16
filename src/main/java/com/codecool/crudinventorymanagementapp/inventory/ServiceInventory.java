@@ -3,8 +3,8 @@ package com.codecool.crudinventorymanagementapp.inventory;
 public interface ServiceInventory {
 
     Iterable<InventoryModel> findAllInventory();
-    InventoryModel findOneInventory(Integer id);
+    InventoryModel findOneInventory(Long id);
     void createInventory(InventoryModel inventoryModel);
-    void deleteInventory(Integer id);
+    void deleteInventory(Long id);
     void updateInventory(InventoryModel inventoryModel);
 }
