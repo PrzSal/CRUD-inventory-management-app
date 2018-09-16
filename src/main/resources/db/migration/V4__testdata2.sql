@@ -1,0 +1,1 @@
+INSERT INTO inventory_model(buying_date, category, code, initial_value, manufacture, name_product, description, status, place_residence, employee_model_id) VALUES('25.07.2018',	'electronics', '1234567',	'150',	'Dell',	'Latitude E7440', 'lap',	'remove', 'pol-krakow',	1);
