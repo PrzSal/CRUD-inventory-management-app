@@ -11,7 +11,7 @@ public class InventoryModel {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotEmpty
     private String nameProduct;
@@ -43,11 +43,11 @@ public class InventoryModel {
     @OneToOne(cascade = CascadeType.PERSIST)
     private EmployeeModel employeeModel;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
