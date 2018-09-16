@@ -31,7 +31,7 @@ public class ServiceInventoryImpl implements ServiceInventory {
     }
 
     @Override
-    public InventoryModel findOneInventory(Integer id) {
+    public InventoryModel findOneInventory(Long id) {
         return this.repositoryInventory.findOne(id);
     }
 
@@ -43,7 +43,7 @@ public class ServiceInventoryImpl implements ServiceInventory {
     }
 
     @Override
-    public void deleteInventory(Integer id) {
+    public void deleteInventory(Long id) {
         this.repositoryInventory.delete(id);
     }
 

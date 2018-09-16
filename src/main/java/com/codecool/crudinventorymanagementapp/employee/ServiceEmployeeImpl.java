@@ -2,6 +2,8 @@ package com.codecool.crudinventorymanagementapp.employee;
 
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 @Service
 public class ServiceEmployeeImpl implements ServiceEmployee {
     private RepositoryEmployee repositoryEmployee;
@@ -16,7 +18,7 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
     }
 
     @Override
-    public EmployeeModel findOneEmployee(Integer id) {
+    public EmployeeModel findOneEmployee(Long id) {
         return this.repositoryEmployee.findOne(id);
     }
 
@@ -28,7 +30,7 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
     }
 
     @Override
-    public void deleteEmployee(Integer id) {
+    public void deleteEmployee(Long id) {
         this.repositoryEmployee.delete(id);
     }
 
@@ -36,7 +38,7 @@ public class ServiceEmployeeImpl implements ServiceEmployee {
     public void updateEmployee(EmployeeModel employeeModel) {
         employeeModel.setLogin(createLogin(employeeModel));
         employeeModel.setPassword(createPassword(employeeModel));
-        if (employeeModel.getId() != 0 && repositoryEmployee.findOne(employeeModel.getId()) != null) {
+        if (employeeModel.getId().longValue() != 0 && repositoryEmployee.findOne(employeeModel.getId()) != null) {
             System.out.println( );
             try {
                 repositoryEmployee.save(employeeModel);
