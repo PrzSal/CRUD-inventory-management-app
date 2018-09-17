@@ -23,7 +23,7 @@ public class ControllerInventory {
     @GetMapping(path = "")
     public ModelAndView index() {
         Map<String, Iterable> params = new HashMap<>();
-        params.put("inventories", this.serviceInventory.findAllInventory());
+        params.put("inventories", this.serviceInventory.findAllInventoryForUser());
         return new ModelAndView("inventory", params);
     }
 
@@ -37,7 +37,7 @@ public class ControllerInventory {
     public ModelAndView createInventory(@ModelAttribute InventoryModel inventoryModel) {
         this.serviceInventory.createInventory(inventoryModel);
         Map<String, Iterable> params = new HashMap<>();
-        params.put("inventories", this.serviceInventory.findAllInventory());
+        params.put("inventories", this.serviceInventory.findAllInventoryForUser());
         return new ModelAndView("redirect:/inventory", params);
     }
 
@@ -57,7 +57,7 @@ public class ControllerInventory {
         inventoryModel.setId(Long.valueOf(id));
         this.serviceInventory.updateInventory(inventoryModel);
         Map<String, Iterable> params = new HashMap<>();
-        params.put("inventories", this.serviceInventory.findAllInventory());
+        params.put("inventories", this.serviceInventory.findAllInventoryForUser());
         return new ModelAndView("redirect:/inventory", params);
     }
 
@@ -65,7 +65,7 @@ public class ControllerInventory {
     public ModelAndView delete(@PathVariable String id) {
         this.serviceInventory.deleteInventory(Long.valueOf(id));
         Map<String, Iterable> params = new HashMap<>();
-        params.put("inventories", this.serviceInventory.findAllInventory());
+        params.put("inventories", this.serviceInventory.findAllInventoryForUser());
         return new ModelAndView("redirect:/inventory", params);
     }
 }
