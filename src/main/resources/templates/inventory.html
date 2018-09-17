@@ -7,12 +7,11 @@
 <div th:replace="header :: header"/>
 <div class="container">
     <div class="starter-template">
-        <a th:href="@{/inventory/add}">add</a>
         <div class="table">
-
             <table class="tg">
                 <div class="text">List of Employee</div>
                 <tr>
+                    <button th:onclick="|window.location.href='/inventory/add'|">add inventory</button>
                     <td>Delete</td>
                     <td>Edit Record</td>
                     <td>Id</td>
@@ -33,7 +32,7 @@
                             <input class="btn primary" type="submit" value="delete"/>
                         </td>
                     </form>
-                    <td> <a th:href="@{/inventory/}+${inventory.id}">edit</a> </td>
+                    <td> <button th:onclick="|window.location.href='@{/inventory/}+${inventory.id}'|">edit</button> </td>
                     <td th:text="${inventory.id}">id</td>
                     <td th:text="${inventory.nameProduct}">Product name</td>
                     <td th:text="${inventory.description}">Description</td>
