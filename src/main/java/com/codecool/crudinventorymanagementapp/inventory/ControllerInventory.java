@@ -14,6 +14,7 @@ import java.util.Map;
 public class ControllerInventory {
 
     private ServiceInventory serviceInventory;
+
     @Autowired
     public ControllerInventory(ServiceInventory serviceInventory) {
         this.serviceInventory = serviceInventory;
@@ -44,7 +45,7 @@ public class ControllerInventory {
     public ModelAndView editEmployee(@PathVariable String id, Model model) {
         Map<String, Iterable> params = new HashMap<>();
         ArrayList<InventoryModel> test = new ArrayList<>();
-        test.add(this.serviceInventory.findOneInventory(Integer.valueOf(id)));
+        test.add(this.serviceInventory.findOneInventory(Long.valueOf(id)));
         model.addAttribute("inventoryModel", test.get(0));
         params.put("inventories", test);
 
@@ -53,7 +54,7 @@ public class ControllerInventory {
 
     @RequestMapping(value ="/inventory/{id}", method= RequestMethod.PUT)
     public ModelAndView update(@PathVariable String id, @ModelAttribute InventoryModel inventoryModel) {
-        inventoryModel.setId(Integer.valueOf(id));
+        inventoryModel.setId(Long.valueOf(id));
         this.serviceInventory.updateInventory(inventoryModel);
         Map<String, Iterable> params = new HashMap<>();
         params.put("inventories", this.serviceInventory.findAllInventoryForUser());
@@ -62,7 +63,7 @@ public class ControllerInventory {
 
     @RequestMapping(value ="/inventory/delete/{id}", method= RequestMethod.DELETE)
     public ModelAndView delete(@PathVariable String id) {
-        this.serviceInventory.deleteInventory(Integer.valueOf(id));
+        this.serviceInventory.deleteInventory(Long.valueOf(id));
         Map<String, Iterable> params = new HashMap<>();
         params.put("inventories", this.serviceInventory.findAllInventoryForUser());
         return new ModelAndView("redirect:/inventory", params);

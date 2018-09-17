@@ -1,0 +1,2 @@
+INSERT INTO employee_model(email, enabled, login, name, password, phone, region_responsibility, role, surname) VALUES('admin@op.pl',	true,	'admadm',	'admin',	'admadm',	'54678987888',	'pol-krakow',	'ROLE_ADMIN',	'admin');
+INSERT INTO employee_model(email, enabled, login, name, password, phone, region_responsibility, role, surname) VALUES('tomkow@op.pl',	true,	'TomKow',	'Tomasz',	'TomKow',	'89877489932',	'pol-krakow',	'ROLE_EMPLOYEE',	'Kowalski');

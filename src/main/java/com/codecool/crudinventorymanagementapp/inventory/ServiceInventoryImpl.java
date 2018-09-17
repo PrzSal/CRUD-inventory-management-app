@@ -28,12 +28,12 @@ public class ServiceInventoryImpl implements ServiceInventory {
 
     @Override
     public Iterable<InventoryModel> findAllInventoryForUser() {
-        Integer employeeModelId = this.findAndCreateEmployeeModel().getId();
+        Long employeeModelId = this.findAndCreateEmployeeModel().getId();
         return serviceToInventory.findAllByEmployeeModelId(employeeModelId);
     }
 
     @Override
-    public InventoryModel findOneInventory(Integer id) {
+    public InventoryModel findOneInventory(Long id) {
         return this.repositoryInventory.findOne(id);
     }
 
@@ -46,7 +46,7 @@ public class ServiceInventoryImpl implements ServiceInventory {
     }
 
     @Override
-    public void deleteInventory(Integer id) {
+    public void deleteInventory(Long id) {
         this.repositoryInventory.delete(id);
     }
 
